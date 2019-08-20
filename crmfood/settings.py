@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = True #config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -141,12 +141,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 REST_FRAMEWORK = {
+    '''Rewrite EXCEPTION_HANDLER conduit > crmfood'''
+    # 'EXCEPTION_HANDLER': 'conduit.apps.core.exceptions.core_exception_handler',
+    # 'NON_FIELD_ERRORS_KEY': 'error',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-    )
+    ),
+    # 'DEFAULT_AUTHENTICATION_CLASSESS': (
+    #     'conduit.apps.authentication.backends.JWTAuthentication',
+    # ),
 }
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
