@@ -142,17 +142,19 @@ USE_TZ = True
 
 REST_FRAMEWORK = {
     '''Rewrite EXCEPTION_HANDLER conduit > crmfood'''
-    # 'EXCEPTION_HANDLER': 'conduit.apps.core.exceptions.core_exception_handler',
-    # 'NON_FIELD_ERRORS_KEY': 'error',
+    'EXCEPTION_HANDLER': 'crmfood.authentication.core.exceptions.core_exception_handler',
+    'NON_FIELD_ERRORS_KEY': 'error',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
-    # 'DEFAULT_AUTHENTICATION_CLASSESS': (
-    #     'conduit.apps.authentication.backends.JWTAuthentication',
-    # ),
+    'TEST_REQUEST_DEFAULT_FORMAT': (
+        'json',
+    ),
 }
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
